@@ -403,7 +403,7 @@ function EpisodeRow({ episode, showId, apiBase }: { episode: Episode; showId: st
               </div>
               <div>
                 <label className="text-xs font-medium text-gray-600">Status</label>
-                <select value={form.status} onChange={e => setForm({...form, status: e.target.value})}
+                <select value={form.status} onChange={e => setForm({...form, status: e.target.value as "draft" | "published"})}
                   className="w-full mt-1 px-2 py-1.5 border border-gray-300 rounded text-sm">
                   <option value="draft">Draft</option>
                   <option value="published">Published</option>
