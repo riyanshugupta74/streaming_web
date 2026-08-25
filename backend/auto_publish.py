@@ -1,7 +1,7 @@
 import asyncio
 import os
 from sqlalchemy import select
-from app.db.session import async_session_maker
+from app.db.session import async_session_factory
 from app.models import User
 from app.services.publish_service import publish_catalogue
 from app.storage.local import LocalStorageBackend
@@ -10,7 +10,7 @@ async def main():
     print("Auto-publishing catalogue on startup...")
     storage = LocalStorageBackend("data")
     
-    async with async_session_maker() as db:
+    async with async_session_factory() as db:
         # Find the admin user
         result = await db.execute(select(User).where(User.role == "admin").limit(1))
         admin = result.scalars().first()
