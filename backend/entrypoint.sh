@@ -7,17 +7,28 @@ echo "🚀 Peblo TV Mini Backend Starting..."
 echo "⏳ Waiting for database..."
 RETRIES=15
 until python -c "
-import psycopg2
+import asyncio
+import asyncpg
 import os
-url = os.environ.get('DATABASE_URL_SYNC', os.environ.get('DATABASE_URL', 'postgresql://peblo:peblo@db:5432/peblo'))
-# Fix Render's postgres:// prefix
-if url.startswith('postgres://'):
-    url = url.replace('postgres://', 'postgresql://', 1)
-if url.startswith('postgresql+asyncpg://'):
-    url = url.replace('postgresql+asyncpg://', 'postgresql://', 1)
-conn = psycopg2.connect(url)
-conn.close()
-print('Database is ready!')
+import sys
+
+async def check_db():
+    url = os.environ.get('DATABASE_URL', 'postgresql+asyncpg://peblo:peblo@db:5432/peblo')
+    if url.startswith('postgres://'):
+        url = url.replace('postgres://', 'postgresql://', 1)
+    
+    # asyncpg expects postgresql:// (without the +asyncpg part for connect)
+    if url.startswith('postgresql+asyncpg://'):
+        url = url.replace('postgresql+asyncpg://', 'postgresql://', 1)
+
+    try:
+        conn = await asyncpg.connect(url)
+        await conn.close()
+        print('Database is ready!')
+    except Exception as e:
+        sys.exit(1)
+
+asyncio.run(check_db())
 " 2>/dev/null; do
     RETRIES=$((RETRIES - 1))
     if [ $RETRIES -le 0 ]; then

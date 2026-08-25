@@ -8,15 +8,22 @@ import json
 import os
 import sys
 import uuid
+import asyncio
 from datetime import datetime, timezone
 
-import psycopg2
+import asyncpg
 import bcrypt
 
 DATABASE_URL = os.environ.get(
-    "DATABASE_URL_SYNC",
+    "DATABASE_URL",
     "postgresql://peblo:peblo@db:5432/peblo"
 )
+# Render provides postgres:// but asyncpg needs postgresql://
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+if DATABASE_URL.startswith("postgresql+asyncpg://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql+asyncpg://", "postgresql://", 1)
+
 
 SEED_FILE = os.environ.get("SEED_FILE", "/app/seed/seed_shows.json")
 
@@ -27,24 +34,26 @@ DEV_USERS = [
 ]
 
 
-def seed():
+async def seed():
     """Run the seed operation."""
     print("🌱 Starting database seed...")
-    conn = psycopg2.connect(DATABASE_URL)
-    conn.autocommit = False
-    cur = conn.cursor()
+    try:
+        conn = await asyncpg.connect(DATABASE_URL)
+    except Exception as e:
+        print(f"❌ Failed to connect to DB for seeding: {e}")
+        raise
 
     try:
         # Seed users (idempotent)
         for user in DEV_USERS:
-            cur.execute("SELECT id FROM users WHERE email = %s", (user["email"],))
-            if cur.fetchone() is None:
+            record = await conn.fetchrow("SELECT id FROM users WHERE email = $1", user["email"])
+            if record is None:
                 user_id = str(uuid.uuid4())
                 password_hash = bcrypt.hashpw(user["password"].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-                cur.execute(
+                await conn.execute(
                     """INSERT INTO users (id, email, password_hash, role, created_at)
-                    VALUES (%s, %s, %s, %s, %s)""",
-                    (user_id, user["email"], password_hash, user["role"], datetime.now(timezone.utc)),
+                    VALUES ($1, $2, $3, $4, $5)""",
+                    user_id, user["email"], password_hash, user["role"], datetime.now(timezone.utc),
                 )
                 print(f"  ✓ Created user: {user['email']} ({user['role']})")
             else:
@@ -57,84 +66,74 @@ def seed():
 
             for show_data in seed_data.get("shows", []):
                 # Check if show already exists by title
-                cur.execute("SELECT id FROM shows WHERE title = %s", (show_data["title"],))
-                existing = cur.fetchone()
+                record = await conn.fetchrow("SELECT id FROM shows WHERE title = $1", show_data["title"])
 
-                if existing:
+                if record:
                     print(f"  → Show already exists: {show_data['title']}")
                     continue
 
                 # Create show
                 show_id = str(uuid.uuid4())
                 now = datetime.now(timezone.utc)
-                cur.execute(
+                await conn.execute(
                     """INSERT INTO shows (id, title, synopsis, category, section, status, created_at, updated_at)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""",
-                    (
-                        show_id,
-                        show_data["title"],
-                        show_data.get("synopsis", ""),
-                        show_data["category"],
-                        show_data.get("section", ""),
-                        show_data.get("status", "draft"),
-                        now,
-                        now,
-                    ),
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)""",
+                    show_id,
+                    show_data["title"],
+                    show_data.get("synopsis", ""),
+                    show_data["category"],
+                    show_data.get("section", ""),
+                    show_data.get("status", "draft"),
+                    now,
+                    now,
                 )
                 print(f"  ✓ Created show: {show_data['title']}")
 
                 # Create seasons and episodes
                 for season_data in show_data.get("seasons", []):
                     season_id = str(uuid.uuid4())
-                    cur.execute(
+                    await conn.execute(
                         """INSERT INTO seasons (id, show_id, season_number, title)
-                        VALUES (%s, %s, %s, %s)""",
-                        (
-                            season_id,
-                            show_id,
-                            season_data["season_number"],
-                            season_data["title"],
-                        ),
+                        VALUES ($1, $2, $3, $4)""",
+                        season_id,
+                        show_id,
+                        season_data["season_number"],
+                        season_data["title"],
                     )
                     print(f"    ✓ Season {season_data['season_number']}: {season_data['title']}")
 
                     for ep_data in season_data.get("episodes", []):
                         episode_id = str(uuid.uuid4())
-                        cur.execute(
+                        await conn.execute(
                             """INSERT INTO episodes
                             (id, season_id, episode_number, title, description,
                              duration, content_group, language, status, created_at, updated_at)
-                            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
-                            (
-                                episode_id,
-                                season_id,
-                                ep_data["episode_number"],
-                                ep_data["title"],
-                                ep_data.get("description", ""),
-                                ep_data.get("duration"),  # Can be None!
-                                ep_data["content_group"],
-                                ep_data["language"],
-                                ep_data.get("status", "draft"),
-                                now,
-                                now,
-                            ),
+                            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)""",
+                            episode_id,
+                            season_id,
+                            ep_data["episode_number"],
+                            ep_data["title"],
+                            ep_data.get("description", ""),
+                            ep_data.get("duration"),  # Can be None!
+                            ep_data["content_group"],
+                            ep_data["language"],
+                            ep_data.get("status", "draft"),
+                            now,
+                            now,
                         )
                         lang_info = f" [{ep_data['language']}]" if ep_data.get("language") else ""
                         print(f"      ✓ E{ep_data['episode_number']}: {ep_data['title']}{lang_info}")
         else:
             print(f"  ⚠ Seed file not found: {SEED_FILE}")
 
-        conn.commit()
         print("\n✅ Seed completed successfully!")
 
     except Exception as e:
-        conn.rollback()
         print(f"\n❌ Seed failed: {e}")
         raise
     finally:
-        cur.close()
-        conn.close()
+        await conn.close()
 
 
 if __name__ == "__main__":
-    seed()
+    asyncio.run(seed())
