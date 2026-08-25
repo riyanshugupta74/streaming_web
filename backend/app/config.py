@@ -87,7 +87,7 @@ class Settings(BaseSettings):
     # API
     api_host: str = "0.0.0.0"
     api_port: int = 8000
-    cors_origins: str = "http://localhost:5173,http://localhost:5174,http://localhost:3001,http://localhost:3002"
+    cors_origins: str = "http://localhost:5173,http://localhost:5174,http://localhost:3001,http://localhost:3002,https://streaming-web-veiwer.onrender.com,https://streaming-web-cms.onrender.com"
 
     model_config = {"env_file": ".env", "extra": "ignore"}
 
