@@ -48,6 +48,10 @@ alembic upgrade head
 echo "🌱 Seeding database..."
 python -m app.seed
 
+# Auto-fix missing content/artwork
+echo "🛠️ Fixing missing artwork and metadata..."
+python fix_db.py
+
 # Start the API server
 echo "🌐 Starting FastAPI server..."
 exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
