@@ -7,24 +7,33 @@ from functools import lru_cache
 
 def _get_database_url() -> str:
     """Get async database URL, converting from Render's format if needed."""
-    url = os.environ.get("DATABASE_URL", "postgresql+asyncpg://peblo:peblo@db:5432/peblo")
-    # Render provides postgres:// but asyncpg needs postgresql+asyncpg://
+    url = os.environ.get("DATABASE_URL", "postgresql+asyncpg://peblo:peblo@db:5432/peblo").strip()
+    # Render provides postgres:// or postgresql:// but asyncpg needs postgresql+asyncpg://
     if url.startswith("postgres://"):
         url = url.replace("postgres://", "postgresql+asyncpg://", 1)
     elif url.startswith("postgresql://"):
         url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    
+    # Fallback to catch anything else if it doesn't have the driver
+    if url.startswith("postgresql") and not url.startswith("postgresql+asyncpg"):
+        url = url.replace("postgresql", "postgresql+asyncpg", 1)
+        
     return url
 
 
 def _get_sync_database_url() -> str:
     """Get sync database URL, converting from Render's format if needed."""
-    url = os.environ.get("DATABASE_URL_SYNC",
-                         os.environ.get("DATABASE_URL", "postgresql://peblo:peblo@db:5432/peblo"))
+    url = os.environ.get(
+        "DATABASE_URL_SYNC",
+        os.environ.get("DATABASE_URL", "postgresql://peblo:peblo@db:5432/peblo")
+    ).strip()
+    
     # Ensure it starts with postgresql:// (not postgres:// or postgresql+asyncpg://)
     if url.startswith("postgres://"):
         url = url.replace("postgres://", "postgresql://", 1)
     elif url.startswith("postgresql+asyncpg://"):
         url = url.replace("postgresql+asyncpg://", "postgresql://", 1)
+        
     return url
 
 
