@@ -4,11 +4,11 @@ from sqlalchemy import select
 from app.db.session import async_session_factory
 from app.models import User
 from app.services.publish_service import publish_catalogue
-from app.storage.local import LocalStorageBackend
+from app.storage import LocalStorage
 
 async def main():
     print("Auto-publishing catalogue on startup...")
-    storage = LocalStorageBackend("data")
+    storage = LocalStorage("data")
     
     async with async_session_factory() as db:
         # Find the admin user
