@@ -30,13 +30,14 @@ async def main():
             
             # Fix Artwork for Show (poster, banner)
             for aw_type in ["poster", "banner"]:
-                existing = await conn.fetchrow("SELECT id FROM artwork WHERE entity_type = 'show' AND entity_id = $1 AND type = $2", show["id"], aw_type)
+                existing = await conn.fetchrow("SELECT id FROM artwork WHERE show_id = $1 AND type = $2", show["id"], aw_type)
                 if not existing:
                     # random placeholder image (picsum)
-                    url = f"https://picsum.photos/seed/{show['id']}{aw_type}/600/900" if aw_type == "poster" else f"https://picsum.photos/seed/{show['id']}{aw_type}/1280/720"
+                    w, h = (600, 900) if aw_type == "poster" else (1280, 720)
+                    url = f"https://picsum.photos/seed/{show['id']}{aw_type}/{w}/{h}"
                     await conn.execute(
-                        "INSERT INTO artwork (id, entity_type, entity_id, type, url, created_at) VALUES ($1, 'show', $2, $3, $4, $5)",
-                        str(uuid.uuid4()), show["id"], aw_type, url, datetime.now(timezone.utc)
+                        "INSERT INTO artwork (id, show_id, type, storage_key, width, height, size_bytes, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+                        str(uuid.uuid4()), show["id"], aw_type, url, w, h, 100000, datetime.now(timezone.utc)
                     )
 
         # Fix Episodes
@@ -49,12 +50,13 @@ async def main():
             await conn.execute("UPDATE episodes SET duration = 1800 WHERE id = $1 AND duration IS NULL", ep["id"])
             
             # Fix Artwork for Episode (thumbnail)
-            existing = await conn.fetchrow("SELECT id FROM artwork WHERE entity_type = 'episode' AND entity_id = $1 AND type = 'thumbnail'", ep["id"])
+            existing = await conn.fetchrow("SELECT id FROM artwork WHERE episode_id = $1 AND type = 'thumbnail'", ep["id"])
             if not existing:
-                url = f"https://picsum.photos/seed/{ep['id']}thumb/640/360"
+                w, h = 640, 360
+                url = f"https://picsum.photos/seed/{ep['id']}thumb/{w}/{h}"
                 await conn.execute(
-                    "INSERT INTO artwork (id, entity_type, entity_id, type, url, created_at) VALUES ($1, 'episode', $2, 'thumbnail', $3, $4)",
-                    str(uuid.uuid4()), ep["id"], url, datetime.now(timezone.utc)
+                    "INSERT INTO artwork (id, episode_id, type, storage_key, width, height, size_bytes, created_at) VALUES ($1, $2, 'thumbnail', $3, $4, $5, $6, $7)",
+                    str(uuid.uuid4()), ep["id"], url, w, h, 100000, datetime.now(timezone.utc)
                 )
 
         print("Successfully fixed all missing metadata and artwork!")
