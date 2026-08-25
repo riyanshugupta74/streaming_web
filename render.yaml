@@ -1,0 +1,76 @@
+# Render Blueprint – Peblo TV Streaming Web
+# https://render.com/docs/blueprint-spec
+
+databases:
+  - name: peblo-db
+    plan: free
+    databaseName: peblo
+    user: peblo
+
+services:
+  # ─── Backend API ──────────────────────────────────────────────────────────
+  - type: web
+    name: peblo-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: peblo-db
+          property: connectionString
+        # Render provides a standard postgres:// URL; we need asyncpg
+      - key: DATABASE_URL_SYNC
+        fromDatabase:
+          name: peblo-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: STORAGE_BACKEND
+        value: local
+      - key: STORAGE_PATH
+        value: /app/storage
+      - key: CORS_ORIGINS
+        value: https://peblo-viewer.onrender.com,https://peblo-cms.onrender.com
+
+  # ─── Viewer Frontend (Static Site) ────────────────────────────────────────
+  - type: web
+    name: peblo-viewer
+    runtime: static
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    rootDir: ./viewer
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://peblo-api.onrender.com
+
+  # ─── CMS Frontend (Static Site) ──────────────────────────────────────────
+  - type: web
+    name: peblo-cms
+    runtime: static
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    rootDir: ./cms
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://peblo-api.onrender.com
