@@ -1,0 +1,44 @@
+# Environment
+.env
+.env.local
+.env.production
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Storage (runtime generated catalogues)
+storage/catalogues/*.json
+
+# Docker volumes
+postgres_data/
+
+# Temporary scripts
+backend/fix.py
+backend/fix_remaining.py
+backend/fix_status.py
+backend/update_images.py
+backend/update_real_images.py
+backend/update_one_episode.py
+backend/update_all_episodes.py
+backend/update_all_artwork.py
