@@ -1,0 +1,277 @@
+{
+  "shows": [
+    {
+      "title": "The Lion's Journey",
+      "synopsis": "A young lion cub embarks on an epic adventure across the African savanna to find his lost pride.",
+      "category": "Adventure",
+      "section": "Featured",
+      "status": "published",
+      "seasons": [
+        {
+          "season_number": 0,
+          "title": "Trailers",
+          "episodes": [
+            {
+              "episode_number": 1,
+              "title": "Official Trailer",
+              "description": "Watch the official trailer for The Lion's Journey.",
+              "duration": 120,
+              "content_group": "lions-trailer-01",
+              "language": "English",
+              "status": "published"
+            }
+          ]
+        },
+        {
+          "season_number": 1,
+          "title": "Season 1: The Beginning",
+          "episodes": [
+            {
+              "episode_number": 1,
+              "title": "The Cub",
+              "description": "A lion cub is born into the pride during a thunderstorm.",
+              "duration": 2700,
+              "content_group": "lions-s1e1",
+              "language": "English",
+              "status": "published"
+            },
+            {
+              "episode_number": 1,
+              "title": "The Cub",
+              "description": "शेर का शावक गरज के दौरान गर्व में पैदा होता है।",
+              "duration": 2700,
+              "content_group": "lions-s1e1",
+              "language": "Hindi",
+              "status": "published"
+            },
+            {
+              "episode_number": 2,
+              "title": "First Steps",
+              "description": "The cub takes his first steps outside the den.",
+              "duration": 2400,
+              "content_group": "lions-s1e2",
+              "language": "English",
+              "status": "published"
+            },
+            {
+              "episode_number": 3,
+              "title": "The Storm",
+              "description": "A massive storm separates the cub from the pride.",
+              "duration": null,
+              "content_group": "lions-s1e3",
+              "language": "English",
+              "status": "published"
+            },
+            {
+              "episode_number": 4,
+              "title": "Lost",
+              "description": "The cub wanders alone through unfamiliar territory.",
+              "duration": 2600,
+              "content_group": "lions-s1e4",
+              "language": "English",
+              "status": "draft"
+            }
+          ]
+        },
+        {
+          "season_number": 2,
+          "title": "Season 2: The Return",
+          "episodes": [
+            {
+              "episode_number": 1,
+              "title": "New Allies",
+              "description": "The lion finds unexpected friends.",
+              "duration": 2800,
+              "content_group": "lions-s2e1",
+              "language": "English",
+              "status": "published"
+            },
+            {
+              "episode_number": 1,
+              "title": "New Allies",
+              "description": "शेर को अप्रत्याशित दोस्त मिलते हैं।",
+              "duration": 2800,
+              "content_group": "lions-s2e1",
+              "language": "Hindi",
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ocean Explorers",
+      "synopsis": "Dive deep into the mysterious world beneath the waves.",
+      "category": "Documentary",
+      "section": "Documentary",
+      "status": "published",
+      "seasons": [
+        {
+          "season_number": 1,
+          "title": "Season 1: Deep Blue",
+          "episodes": [
+            {
+              "episode_number": 1,
+              "title": "The Abyss",
+              "description": "Exploring the deepest parts of the ocean.",
+              "duration": 3600,
+              "content_group": "ocean-s1e1",
+              "language": "English",
+              "status": "published"
+            },
+            {
+              "episode_number": 1,
+              "title": "The Abyss",
+              "description": "சமுத்திரத்தின் ஆழமான பகுதிகளை ஆராய்தல்.",
+              "duration": 3600,
+              "content_group": "ocean-s1e1",
+              "language": "Tamil",
+              "status": "published"
+            },
+            {
+              "episode_number": 2,
+              "title": "Coral Kingdoms",
+              "description": "The vibrant life of coral reefs.",
+              "duration": 3200,
+              "content_group": "ocean-s1e2",
+              "language": "English",
+              "status": "published"
+            },
+            {
+              "episode_number": 3,
+              "title": "Whale Song",
+              "description": "",
+              "duration": 3400,
+              "content_group": "ocean-s1e3",
+              "language": "English",
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Space Rangers",
+      "synopsis": "A team of young astronauts protect the galaxy from cosmic threats.",
+      "category": "Kids",
+      "section": "Kids",
+      "status": "published",
+      "seasons": [
+        {
+          "season_number": 0,
+          "title": "Trailers",
+          "episodes": [
+            {
+              "episode_number": 1,
+              "title": "Space Rangers Teaser",
+              "description": "Coming soon to Peblo TV!",
+              "duration": 60,
+              "content_group": "space-trailer-01",
+              "language": "English",
+              "status": "published"
+            }
+          ]
+        },
+        {
+          "season_number": 1,
+          "title": "Season 1: Blast Off",
+          "episodes": [
+            {
+              "episode_number": 1,
+              "title": "Launch Day",
+              "description": "The rangers prepare for their first mission.",
+              "duration": 1800,
+              "content_group": "space-s1e1",
+              "language": "English",
+              "status": "published"
+            },
+            {
+              "episode_number": 1,
+              "title": "Launch Day",
+              "description": "रेंजर्स अपने पहले मिशन की तैयारी करते हैं।",
+              "duration": 1800,
+              "content_group": "space-s1e1",
+              "language": "Hindi",
+              "status": "published"
+            },
+            {
+              "episode_number": 2,
+              "title": "Asteroid Alert",
+              "description": "An asteroid threatens the space station.",
+              "duration": 1900,
+              "content_group": "space-s1e2",
+              "language": "English",
+              "status": "published"
+            },
+            {
+              "episode_number": 3,
+              "title": "Dark Nebula",
+              "description": "The rangers enter a mysterious nebula.",
+              "duration": 2000,
+              "content_group": "space-s1e3",
+              "language": "English",
+              "status": "draft"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cooking with Grandma",
+      "synopsis": "",
+      "category": "Kids",
+      "section": "",
+      "status": "published",
+      "seasons": [
+        {
+          "season_number": 1,
+          "title": "Season 1",
+          "episodes": [
+            {
+              "episode_number": 1,
+              "title": "Chocolate Cake",
+              "description": "Grandma teaches her secret chocolate cake recipe.",
+              "duration": 1500,
+              "content_group": "cook-s1e1",
+              "language": "English",
+              "status": "published"
+            },
+            {
+              "episode_number": 2,
+              "title": "Pasta Night",
+              "description": "Learn to make fresh pasta from scratch.",
+              "duration": 1600,
+              "content_group": "cook-s1e2",
+              "language": "English",
+              "status": "published"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Mountain Climbers",
+      "synopsis": "Follow elite climbers as they tackle the world's most dangerous peaks.",
+      "category": "Adventure",
+      "section": "Adventure",
+      "status": "draft",
+      "seasons": [
+        {
+          "season_number": 1,
+          "title": "Season 1: Everest",
+          "episodes": [
+            {
+              "episode_number": 1,
+              "title": "Base Camp",
+              "description": "The team arrives at Everest base camp.",
+              "duration": 2800,
+              "content_group": "mountain-s1e1",
+              "language": "English",
+              "status": "draft"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

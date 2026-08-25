@@ -1,0 +1,337 @@
+{
+  "version": "7b7e7556",
+  "published_at": "2026-08-25T12:15:58.819528+00:00",
+  "sections": [
+    {
+      "name": "Featured",
+      "shows": [
+        {
+          "id": "c9b7cb6e-be5c-4cd7-bcf1-5d00c119e4cc",
+          "title": "Cooking with Grandma",
+          "synopsis": "A great show about cooking",
+          "category": "Kids",
+          "artwork": {
+            "banner": "/storage/https://picsum.photos/seed/efeaf441-a19d-47d1-8611-cbb9ba01adf7/1200/600",
+            "poster": "/storage/https://picsum.photos/seed/16fd36d4-1c5a-4f75-b588-b1dbf505cbea/400/600"
+          },
+          "seasons": [
+            {
+              "season_number": 1,
+              "title": "Season 1",
+              "episodes": [
+                {
+                  "content_group": "cook-s1e1",
+                  "episode_number": 1,
+                  "title": "Chocolate Cake",
+                  "description": "Grandma teaches her secret chocolate cake recipe.",
+                  "duration": 1500,
+                  "languages": [
+                    "English"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/73ec29d8-90df-4126-ae84-623270aa55dd/600/400"
+                  }
+                },
+                {
+                  "content_group": "cook-s1e2",
+                  "episode_number": 2,
+                  "title": "Pasta Night",
+                  "description": "Learn to make fresh pasta from scratch.",
+                  "duration": 1600,
+                  "languages": [
+                    "English"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/1c1b9892-8612-4136-9108-c628894d1ff9/600/400"
+                  }
+                }
+              ]
+            }
+          ],
+          "trailers": []
+        },
+        {
+          "id": "62ebda7b-21dd-48ed-8e66-f8fa263bea2e",
+          "title": "The Lion's Journey",
+          "synopsis": "A young lion cub embarks on an epic adventure across the African savanna to find his lost pride.",
+          "category": "Adventure",
+          "artwork": {
+            "banner": "/storage/https://picsum.photos/seed/678588aa-733e-435d-8992-f1660d6977a5/1200/600",
+            "poster": "/storage/https://picsum.photos/seed/cf81e395-90ff-4f92-8092-095df3d4e063/400/600"
+          },
+          "seasons": [
+            {
+              "season_number": 1,
+              "title": "Season 1: The Beginning",
+              "episodes": [
+                {
+                  "content_group": "lions-s1e1",
+                  "episode_number": 1,
+                  "title": "The Cub",
+                  "description": "A lion cub is born into the pride during a thunderstorm.",
+                  "duration": 2700,
+                  "languages": [
+                    "English",
+                    "Hindi"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/bef55e94-33ca-4f20-802e-b3f89eefa7a3/600/400"
+                  }
+                },
+                {
+                  "content_group": "lions-s1e2",
+                  "episode_number": 2,
+                  "title": "First Steps",
+                  "description": "The cub takes his first steps outside the den.",
+                  "duration": 2400,
+                  "languages": [
+                    "English"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/80982a38-7227-443a-8368-adf40334cd12/600/400"
+                  }
+                },
+                {
+                  "content_group": "lions-s1e3",
+                  "episode_number": 3,
+                  "title": "The Storm",
+                  "description": "A massive storm separates the cub from the pride.",
+                  "duration": 600,
+                  "languages": [
+                    "English"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/03855ce6-725b-48ee-9275-34e4dc65d426/600/400"
+                  }
+                },
+                {
+                  "content_group": "lions-s1e4",
+                  "episode_number": 4,
+                  "title": "Lost",
+                  "description": "The cub wanders alone through unfamiliar territory.",
+                  "duration": 2600,
+                  "languages": [
+                    "English"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/1e7b6f4e-1b8e-4726-a115-8fb3d714dbd0/600/400"
+                  }
+                }
+              ]
+            },
+            {
+              "season_number": 2,
+              "title": "Season 2: The Return",
+              "episodes": [
+                {
+                  "content_group": "lions-s2e1",
+                  "episode_number": 1,
+                  "title": "New Allies",
+                  "description": "The lion finds unexpected friends.",
+                  "duration": 2800,
+                  "languages": [
+                    "English",
+                    "Hindi"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/cc78f8dc-3c20-4746-b0a1-ce4e3f5dbdaa/600/400"
+                  }
+                }
+              ]
+            }
+          ],
+          "trailers": [
+            {
+              "content_group": "lions-trailer-01",
+              "title": "Official Trailer",
+              "duration": 120,
+              "languages": [
+                "English"
+              ],
+              "artwork": {
+                "thumbnail": "/storage/https://picsum.photos/seed/bf0c3adf-3590-401e-9386-79b4bc6a1566/600/400"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Kids",
+      "shows": [
+        {
+          "id": "15e3cf86-6ab4-4dab-8d8f-2da84dd90bbd",
+          "title": "Space Rangers",
+          "synopsis": "A team of young astronauts protect the galaxy from cosmic threats.",
+          "category": "Kids",
+          "artwork": {
+            "banner": "/storage/https://picsum.photos/seed/6e1e2352-0d48-489b-adb2-5810fbae2266/1200/600",
+            "poster": "/storage/https://picsum.photos/seed/3c4c6303-1497-440d-a87d-da60686f33c7/400/600"
+          },
+          "seasons": [
+            {
+              "season_number": 1,
+              "title": "Season 1: Blast Off",
+              "episodes": [
+                {
+                  "content_group": "space-s1e1",
+                  "episode_number": 1,
+                  "title": "Launch Day",
+                  "description": "The rangers prepare for their first mission.",
+                  "duration": 1800,
+                  "languages": [
+                    "English",
+                    "Hindi"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/0b26c671-e4a5-47fb-9a3b-1ebd2fce5c1c/600/400"
+                  }
+                },
+                {
+                  "content_group": "space-s1e2",
+                  "episode_number": 2,
+                  "title": "Asteroid Alert",
+                  "description": "An asteroid threatens the space station.",
+                  "duration": 1900,
+                  "languages": [
+                    "English"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/f66d8c85-942a-4d67-b816-dae0a25fb7cc/600/400"
+                  }
+                },
+                {
+                  "content_group": "space-s1e3",
+                  "episode_number": 3,
+                  "title": "Dark Nebula",
+                  "description": "The rangers enter a mysterious nebula.",
+                  "duration": 2000,
+                  "languages": [
+                    "English"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/cf2d075c-aef7-47f9-a160-813f47af9ba3/600/400"
+                  }
+                }
+              ]
+            }
+          ],
+          "trailers": [
+            {
+              "content_group": "space-trailer-01",
+              "title": "Space Rangers Teaser",
+              "duration": 60,
+              "languages": [
+                "English"
+              ],
+              "artwork": {
+                "thumbnail": "/storage/https://picsum.photos/seed/8e5472cb-9754-4126-b7ab-aa595965f9a6/600/400"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Adventure",
+      "shows": [
+        {
+          "id": "7c5b5ee2-e5b6-4b93-a761-2b2634dd2b04",
+          "title": "Mountain Climbers",
+          "synopsis": "Follow elite climbers as they tackle the world's most dangerous peaks.",
+          "category": "Adventure",
+          "artwork": {
+            "banner": "/storage/https://picsum.photos/seed/efba1c0f-aeee-4049-ae75-5786cd7ebbae/1200/600",
+            "poster": "/storage/https://picsum.photos/seed/dc181d96-b3c6-4e3a-b4e3-d5fec9513c81/400/600"
+          },
+          "seasons": [
+            {
+              "season_number": 1,
+              "title": "Season 1: Everest",
+              "episodes": [
+                {
+                  "content_group": "mountain-s1e1",
+                  "episode_number": 1,
+                  "title": "Base Camp",
+                  "description": "The team arrives at Everest base camp.",
+                  "duration": 2800,
+                  "languages": [
+                    "English"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/1dbe6e0a-1d5d-46db-8782-27f59c31b4f0/600/400"
+                  }
+                }
+              ]
+            }
+          ],
+          "trailers": []
+        }
+      ]
+    },
+    {
+      "name": "Documentary",
+      "shows": [
+        {
+          "id": "4e19139f-dfe5-472b-8298-bf7c4f60962b",
+          "title": "Ocean Explorers",
+          "synopsis": "Dive deep into the mysterious world beneath the waves.",
+          "category": "Documentary",
+          "artwork": {
+            "banner": "/storage/https://picsum.photos/seed/55c08686-fc73-4806-b055-4a3d758883eb/1200/600",
+            "poster": "/storage/https://picsum.photos/seed/707b9a46-1dec-4181-b039-d8228cde0203/400/600"
+          },
+          "seasons": [
+            {
+              "season_number": 1,
+              "title": "Season 1: Deep Blue",
+              "episodes": [
+                {
+                  "content_group": "ocean-s1e1",
+                  "episode_number": 1,
+                  "title": "The Abyss",
+                  "description": "Exploring the deepest parts of the ocean.",
+                  "duration": 3600,
+                  "languages": [
+                    "English",
+                    "Tamil"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/1628eaf3-cf95-4e9a-90aa-0ddcde208f06/600/400"
+                  }
+                },
+                {
+                  "content_group": "ocean-s1e2",
+                  "episode_number": 2,
+                  "title": "Coral Kingdoms",
+                  "description": "The vibrant life of coral reefs.",
+                  "duration": 3200,
+                  "languages": [
+                    "English"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/726a9881-f9d8-49d2-8439-f4632a01249e/600/400"
+                  }
+                },
+                {
+                  "content_group": "ocean-s1e3",
+                  "episode_number": 3,
+                  "title": "Whale Song",
+                  "description": "A description of whale songs",
+                  "duration": 3400,
+                  "languages": [
+                    "English"
+                  ],
+                  "artwork": {
+                    "thumbnail": "/storage/https://picsum.photos/seed/b81cdc06-276a-4010-9c19-01ca19132226/600/400"
+                  }
+                }
+              ]
+            }
+          ],
+          "trailers": []
+        }
+      ]
+    }
+  ]
+}

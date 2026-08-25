@@ -1,0 +1,81 @@
+{
+  "sections": ["Featured", "Kids", "Adventure", "Documentary"],
+  "categories": ["Kids", "Adventure", "Documentary", "Drama", "Comedy"],
+  "languages": ["English", "Hindi", "Tamil"],
+  "statuses": ["draft", "published"],
+  "artwork_specs": {
+    "poster": {
+      "aspect_ratio": "2:3",
+      "width": 600,
+      "height": 900,
+      "max_size_kb": 200
+    },
+    "banner": {
+      "aspect_ratio": "16:9",
+      "width": 1280,
+      "height": 720,
+      "max_size_kb": 200
+    },
+    "thumbnail": {
+      "aspect_ratio": "16:9",
+      "width": 640,
+      "height": 360,
+      "max_size_kb": 200
+    }
+  },
+  "catalogue_structure": {
+    "version": "string",
+    "published_at": "ISO-8601",
+    "sections": [
+      {
+        "name": "string",
+        "shows": [
+          {
+            "id": "uuid",
+            "title": "string",
+            "synopsis": "string",
+            "category": "string",
+            "artwork": {
+              "poster": "url",
+              "banner": "url"
+            },
+            "seasons": [
+              {
+                "season_number": "int (>= 1)",
+                "title": "string",
+                "episodes": [
+                  {
+                    "content_group": "string",
+                    "episode_number": "int",
+                    "title": "string",
+                    "description": "string",
+                    "duration": "int (seconds)",
+                    "languages": ["string"],
+                    "artwork": {
+                      "thumbnail": "url"
+                    }
+                  }
+                ]
+              }
+            ],
+            "trailers": [
+              {
+                "content_group": "string",
+                "title": "string",
+                "duration": "int",
+                "languages": ["string"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "season_0_behavior": "Season 0 is reserved for trailers. It must NOT appear as a normal season in the viewer. Trailers should be exposed separately.",
+  "validation_rules": {
+    "episode_publish_requires": ["artwork", "duration"],
+    "show_publish_requires": ["section"],
+    "episode_unique_constraint": ["content_group", "language"],
+    "artwork_max_size_bytes": 204800
+  }
+}

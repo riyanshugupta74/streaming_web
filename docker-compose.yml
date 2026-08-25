@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER:-peblo}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-peblo}
+      POSTGRES_DB: ${DB_NAME:-peblo}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U peblo"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://${DB_USER:-peblo}:${DB_PASSWORD:-peblo}@db:5432/${DB_NAME:-peblo}
+      - DATABASE_URL_SYNC=postgresql://${DB_USER:-peblo}:${DB_PASSWORD:-peblo}@db:5432/${DB_NAME:-peblo}
+      - SECRET_KEY=${SECRET_KEY:-super-secret-development-key-do-not-use-in-production}
+      - STORAGE_BACKEND=local
+      - STORAGE_PATH=/app/storage
+    volumes:
+      - ./backend:/app/backend
+      - ./storage:/app/storage
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  cms:
+    build:
+      context: ./cms
+    environment:
+      - VITE_API_URL=/api
+    volumes:
+      - ./cms/src:/app/src
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+
+  viewer:
+    build:
+      context: ./viewer
+    environment:
+      - VITE_API_URL=/api
+    volumes:
+      - ./viewer/src:/app/src
+    ports:
+      - "5174:5174"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
