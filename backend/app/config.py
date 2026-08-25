@@ -37,12 +37,43 @@ def _get_sync_database_url() -> str:
     return url
 
 
+from pydantic import Field, field_validator
+
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
     # Database
-    database_url: str = _get_database_url()
-    database_url_sync: str = _get_sync_database_url()
+    database_url: str = Field(default_factory=_get_database_url)
+    database_url_sync: str = Field(default_factory=_get_sync_database_url)
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def parse_database_url(cls, v: str) -> str:
+        if not v:
+            return v
+        v = v.strip()
+        if v.startswith("postgres://"):
+            v = v.replace("postgres://", "postgresql+asyncpg://", 1)
+        elif v.startswith("postgresql://"):
+            v = v.replace("postgresql://", "postgresql+asyncpg://", 1)
+        elif v.startswith("postgresql+psycopg2://"):
+            v = v.replace("postgresql+psycopg2://", "postgresql+asyncpg://", 1)
+        
+        if v.startswith("postgresql") and not v.startswith("postgresql+asyncpg"):
+            v = v.replace("postgresql", "postgresql+asyncpg", 1)
+        return v
+
+    @field_validator("database_url_sync", mode="before")
+    @classmethod
+    def parse_database_url_sync(cls, v: str) -> str:
+        if not v:
+            return v
+        v = v.strip()
+        if v.startswith("postgres://"):
+            v = v.replace("postgres://", "postgresql://", 1)
+        elif v.startswith("postgresql+asyncpg://"):
+            v = v.replace("postgresql+asyncpg://", "postgresql://", 1)
+        return v
 
     # JWT
     jwt_secret: str = "dev-secret-change-in-production"
