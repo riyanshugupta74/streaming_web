@@ -52,6 +52,10 @@ python -m app.seed
 echo "🛠️ Fixing missing artwork and metadata..."
 python fix_db.py
 
+# Auto-publish on startup (since Render ephemeral disk wipes the catalogue)
+echo "🚀 Auto-publishing catalogue..."
+python auto_publish.py
+
 # Start the API server
 echo "🌐 Starting FastAPI server..."
 exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
