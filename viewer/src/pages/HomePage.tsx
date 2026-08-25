@@ -67,12 +67,15 @@ export default function HomePage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <video 
-            src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" 
-            controls 
-            autoPlay 
-            className="w-full max-w-6xl max-h-screen outline-none"
-          />
+          <div className="relative w-full max-w-6xl aspect-video bg-black rounded overflow-hidden shadow-2xl">
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/b9EkMc79ZSU?autoplay=1&rel=0"
+              title="Placeholder Trailer"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       )}
 
